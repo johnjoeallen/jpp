@@ -1,6 +1,6 @@
 # JPP
 
-JPP is the Java PreProcessor: a small tooling engine behind the J++ concept.
+JPP is the Java PreProcessor: a small tooling engine behind the JPP concept.
 
 The goal is not to build a new language. JPP source files are ordinary Java
 with a small set of pragmatic extension islands. JPP generates normal `.java`
