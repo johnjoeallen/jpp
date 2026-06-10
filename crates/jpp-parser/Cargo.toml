@@ -1,0 +1,15 @@
+[package]
+name = "jpp-parser"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+jpp-diagnostics = { path = "../jpp-diagnostics" }
+jpp-model = { path = "../jpp-model" }
+
+[lints]
+workspace = true

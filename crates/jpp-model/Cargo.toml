@@ -1,0 +1,14 @@
+[package]
+name = "jpp-model"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+jpp-diagnostics = { path = "../jpp-diagnostics" }
+
+[lints]
+workspace = true

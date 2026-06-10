@@ -1,0 +1,81 @@
+package demo;
+
+import java.time.Instant;
+import java.util.UUID;
+
+public class Customer {
+
+    prop get once UUID id;
+
+    prop get final Instant created;
+
+    prop get set String firstName {
+        set {
+            value = value.trim();
+        }
+    }
+
+    prop get set String lastName {
+        set {
+            value = value.trim();
+        }
+    }
+
+    prop get set String email {
+        set {
+            value = value.trim().toLowerCase();
+        }
+    }
+
+    prop get set Customer referrer;
+
+    prop get String referrerName {
+        return referrer?.fullName() ?: "";
+    }
+
+    mapper CustomerSummary summary {
+        displayName = fullName();
+        referrerName = referrer?.fullName() ?: "";
+        email = email();
+    }
+
+    prop get String fullName {
+        return firstName()
+            + " "
+            + lastName();
+    }
+
+    public static class CustomerSummary {
+
+        private String displayName;
+        private String referrerName;
+        private String email;
+
+        public String displayName() {
+            return this.displayName;
+        }
+
+        public CustomerSummary displayName(String value) {
+            this.displayName = value;
+            return this;
+        }
+
+        public String referrerName() {
+            return this.referrerName;
+        }
+
+        public CustomerSummary referrerName(String value) {
+            this.referrerName = value;
+            return this;
+        }
+
+        public String email() {
+            return this.email;
+        }
+
+        public CustomerSummary email(String value) {
+            this.email = value;
+            return this;
+        }
+    }
+}

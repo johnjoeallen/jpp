@@ -1,0 +1,17 @@
+[package]
+name = "jpp-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "jpp"
+path = "src/main.rs"
+
+[dependencies]
+jpp-diagnostics = { path = "../jpp-diagnostics" }
+jpp-generator = { path = "../jpp-generator" }
+jpp-parser = { path = "../jpp-parser" }
+
+[lints]
+workspace = true

@@ -1,0 +1,19 @@
+[workspace]
+members = [
+    "crates/jpp-cli",
+    "crates/jpp-parser",
+    "crates/jpp-model",
+    "crates/jpp-generator",
+    "crates/jpp-diagnostics",
+    "crates/jpp-runtime-tests",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+repository = "https://github.com/jallen/jpp"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"

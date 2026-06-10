@@ -1,0 +1,18 @@
+[package]
+name = "jpp-generator"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+jpp-diagnostics = { path = "../jpp-diagnostics" }
+jpp-model = { path = "../jpp-model" }
+
+[dev-dependencies]
+jpp-parser = { path = "../jpp-parser" }
+
+[lints]
+workspace = true

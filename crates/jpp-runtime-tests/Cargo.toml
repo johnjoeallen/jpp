@@ -1,0 +1,12 @@
+[package]
+name = "jpp-runtime-tests"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+jpp-generator = { path = "../jpp-generator" }
+jpp-parser = { path = "../jpp-parser" }
+
+[lints]
+workspace = true
