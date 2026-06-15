@@ -1,10 +1,10 @@
 # JPP
 
-JPP is the Java PreProcessor: a small tooling engine behind the JPP concept.
+JPP is a Maven plugin for generating Java sources from `.jpp` files.
 
 The goal is not to build a new language. JPP source files are ordinary Java
 with a small set of pragmatic extension islands. JPP generates normal `.java`
-files that work with `javac`, Maven, Gradle, IntelliJ, and the rest of the Java
+files that work with `javac`, Maven, IntelliJ, and the rest of the Java
 tooling ecosystem.
 
 ## Principles
@@ -18,36 +18,47 @@ tooling ecosystem.
 - Prefer generation over magic.
 - Reduce ceremony, not flexibility.
 
-## Workspace
+## Repository Layout
 
 ```text
-crates/
-├── jpp-cli
-├── jpp-parser
-├── jpp-model
-├── jpp-generator
-├── jpp-diagnostics
-└── jpp-runtime-tests
+pom.xml
+maven-plugin/
+scripts/
+examples/customer/
 ```
 
-## Usage
+## Maven Usage
 
-```bash
-cargo run -p jpp-cli -- generate src/main/jpp target/generated-sources/jpp
+Add the plugin to the build and let it run during `generate-sources`:
+
+```xml
+<plugin>
+  <groupId>io.github.jpp</groupId>
+  <artifactId>jpp-maven-plugin</artifactId>
+  <version>0.1.0</version>
+  <configuration>
+    <inputDirectory>${project.basedir}/src/main/jpp</inputDirectory>
+    <outputDirectory>${project.build.directory}/generated-sources/jpp</outputDirectory>
+  </configuration>
+</plugin>
 ```
 
-The binary also accepts the short form:
+The plugin writes generated Java into the output directory and adds that
+directory to the project source roots.
 
-```bash
-jpp src/main/jpp target/generated-sources/jpp
+Default behavior writes to `target/generated-sources/jpp`. To generate files
+next to the `.jpp` sources instead, set:
+
+```xml
+<configuration>
+  <inPlace>true</inPlace>
+</configuration>
 ```
 
-Commands:
+Build and install the plugin locally first:
 
 ```bash
-jpp generate <input-dir> <output-dir>
-jpp validate <input-dir>
-jpp clean <output-dir>
+bash scripts/build-and-install.sh
 ```
 
 ## First Milestone: Properties
@@ -150,22 +161,12 @@ return java.util.Optional.ofNullable(referrer)
 
 ## Example
 
-The repository includes a customer sample with both source and generated output:
+The repository includes a customer sample Maven project at
+`examples/customer/`. Its Java is generated from
+`examples/customer/src/main/jpp/demo/Customer.jpp` during the Maven build.
 
-- JPP source: `examples/customer/src/main/jpp/demo/Customer.jpp`
-- Generated Java: `examples/customer/generated/demo/Customer.java`
-
-Generate it locally with:
-
-```bash
-cargo run -p jpp-cli -- generate examples/customer/src/main/jpp examples/customer/generated
-```
-
-The generated file is checked in intentionally so changes to JPP syntax and
-generation behavior are easy to review.
-
-## Tests
+Build it locally with:
 
 ```bash
-cargo test
+mvn -f examples/pom.xml compile
 ```

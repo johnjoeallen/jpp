@@ -46,7 +46,6 @@ public class Customer {
     }
 
     public static class CustomerSummary {
-
         private String displayName;
         private String referrerName;
         private String email;
